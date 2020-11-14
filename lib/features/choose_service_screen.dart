@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:primer_chapoteo/features/search_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 
 class ChooseServiceScreen extends StatefulWidget {
@@ -21,17 +22,17 @@ class _ChooseServiceScreenState extends State<ChooseServiceScreen> {
             children: [
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(left: 50,right: 20),
-                width: MediaQuery.of(context).size.width*0.7,
+                margin: EdgeInsets.only(left: 50, right: 20),
+                width: MediaQuery.of(context).size.width * 0.7,
                 child: Wrap(
                   children: [
-                      Text(
-                        "I'M LOOKING ",
-                        style: TextStyle(
-                            color: CustomColor.grey,
-                            fontSize: 42,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    Text(
+                      "I'M LOOKING ",
+                      style: TextStyle(
+                          color: CustomColor.grey,
+                          fontSize: 42,
+                          fontWeight: FontWeight.bold),
+                    ),
                     Text(
                       "TO",
                       style: TextStyle(
@@ -39,7 +40,9 @@ class _ChooseServiceScreenState extends State<ChooseServiceScreen> {
                           fontSize: 42,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Container(
                       child: DropdownButton(
                         value: defaultService,
@@ -75,7 +78,12 @@ class _ChooseServiceScreenState extends State<ChooseServiceScreen> {
               Positioned(
                 child: GestureDetector(
                   onTap: () {
-                    //ora pantalla
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen(
+                                  typeService: defaultService,
+                                )));
                   },
                   child: Container(
                     width: 120,
