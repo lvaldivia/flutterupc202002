@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:primer_chapoteo/features/choose_service_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -8,6 +11,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool showButton = false;
+
+  @override
+  void initState() {
+    startTime();
+    super.initState();
+  }
+
+  Timer startTime() {
+    Duration duration = new Duration(seconds: 3);
+    return new Timer(duration, () {
+      showButton = true;
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,36 +41,43 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Image(
                   width: 200, image: AssetImage("assets/images/logo.png")),
             ),
-            Positioned(
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print("HOLA");
-                    },
-                    child: Container(
-                      width: 45,
-                      margin: EdgeInsets.only(bottom: 10),
-                      height: 45,
-                      child:
-                          Icon(Icons.keyboard_arrow_right, color: Colors.white),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: CustomColor.mainColor),
-                    ),
-                  ),
+            showButton
+                ? Positioned(
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChooseServiceScreen()));
+                          },
+                          child: Container(
+                            width: 45,
+                            margin: EdgeInsets.only(bottom: 10),
+                            height: 45,
+                            child: Icon(Icons.keyboard_arrow_right,
+                                color: Colors.white),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: CustomColor.mainColor),
+                          ),
+                        ),
 //                  SizedBox(height: 20,),
-                  Text(
-                    "GO",
-                    style: TextStyle(
-                      color: CustomColor.mainColor,
-                      fontSize: 18,
+                        Text(
+                          "GO",
+                          style: TextStyle(
+                            color: CustomColor.mainColor,
+                            fontSize: 18,
+                          ),
+                        )
+                      ],
                     ),
+                    right: 60,
+                    bottom: 50,
                   )
-                ],
-              ),
-              right: 60,
-              bottom: 50,
-            ),
+                : SizedBox(),
           ],
         ),
       ),
