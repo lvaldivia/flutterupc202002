@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
+import 'package:primer_chapoteo/models/car.dart';
+import 'package:primer_chapoteo/ui/item_info_car.dart';
 
 class SearchScreen extends StatefulWidget {
   final String typeService;
@@ -11,9 +13,19 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  List<Car> cars;
+  @override
+  void initState() {
+    cars = new List<Car>();
+    cars.add(new Car(name: "Alpha Speed",brand:"Aston Martin",price: 320.0,stars: 5.0,opinion: 20));
+    cars.add(new Car(name: "Bravo Speed",brand:"Aston Martin",price: 320.0,stars: 4.0,opinion: 20));
+    cars.add(new Car(name: "Gaa Speed",brand:"Aston Martin",price: 320.0,stars: 2.5,opinion: 20));
+    cars.add(new Car(name: "Alpha 2 Speed",brand:"Aston Martin",price: 320.0,stars: 1.0,opinion: 20));
+    cars.add(new Car(name: "Alpha 3 Speed",brand:"Aston Martin",price: 320.0,stars: 4.8,opinion: 20));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    print(widget.typeService);
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -37,11 +49,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                       maxLines: 1,
                                       maxLength: 200,
                                       style: TextStyle(
-                                        fontSize:20,
-                                        color: Colors.black
-                                      ),
+                                          fontSize: 20, color: Colors.black),
                                       keyboardType: TextInputType.text,
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       decoration: InputDecoration(
                                         counterText: "",
                                         border: InputBorder.none,
@@ -51,13 +62,39 @@ class _SearchScreenState extends State<SearchScreen> {
                                       ),
                                     ),
                                   )
-
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   color: CustomColor.grey,
                                   borderRadius: BorderRadius.circular(20)))
                         ],
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: Column(
+                            children: [
+                              Image(
+                                  image: AssetImage(
+                                      'assets/images/icon_voucher.png')),
+                              Text('No Location',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold)),
+                              Text('Please enter your location',
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold))
+                            ],
+                          )),
+                      Container(
+                        height: 300,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: cars.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) {
+                              return ItemInfoCar(car: cars[i],);
+                            }),
                       )
                     ],
                   ),
