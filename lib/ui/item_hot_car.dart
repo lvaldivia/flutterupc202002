@@ -33,18 +33,32 @@ class _ItemHotCar extends State<ItemHotCar> {
                 ),
               ],
             ),
-            SizedBox(width: 50,),
+            SizedBox(width: 20,),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                   children: [
-                    Text("A"),
-                    Text("A"),
+                    Container(
+                      width: 80,
+                      child: Text(widget.car.brand,maxLines: 2,),
+                    ),
+                    Text(widget.car.price.toString()),
                   ],
                 ),
-                Text("A"),
-                Text("A"),
+                Container(
+                    child: Text(widget.car.name,maxLines: 2,),
+                  width: MediaQuery.of(context).size.width * 0.3,
+                ),
+
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.yellow),
+                    Text(widget.car.stars.toString()),
+                    Text("(${widget.car.opinion})")
+                  ],
+                ),
               ],
             )
           ],

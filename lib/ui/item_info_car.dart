@@ -5,8 +5,11 @@ import 'package:primer_chapoteo/models/car.dart';
 
 class ItemInfoCar extends StatefulWidget {
   final Car car;
+  final ValueChanged<Car> goDetails;
+  final ValueChanged<Car> goService;
 
-  const ItemInfoCar({Key key, this.car}) : super(key: key);
+  const ItemInfoCar({Key key, this.car, this.goDetails, this.goService})
+      : super(key: key);
 
   @override
   _ItemInfoCar createState() => _ItemInfoCar();
@@ -17,32 +20,30 @@ class _ItemInfoCar extends State<ItemInfoCar> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Container(
           width: 200,
           margin: EdgeInsets.only(left: 10, right: 50),
           child: Stack(
             children: [
-
               Positioned(
                   child: Container(
-                    margin: EdgeInsets.only(left: 15, right: 15, top: 10),
-                    child: Column(
+                margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            Text(widget.car.name),
-                            Text(widget.car.price.toString())
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text(widget.car.brand), Text("/day")],
-                        ),
+                        Text(widget.car.name),
+                        Text(widget.car.price.toString())
                       ],
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
-                  )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [Text(widget.car.brand), Text("/day")],
+                    ),
+                  ],
+                ),
+              )),
               Positioned(
                   bottom: 0,
                   child: Column(
@@ -59,25 +60,39 @@ class _ItemInfoCar extends State<ItemInfoCar> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 15,bottom: 15),
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width * 0.26,
-                            child: Text("Details"),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 15,bottom: 15),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0),bottomRight: Radius.circular(25.0)),
-                              color: CustomColor.mainColor,
-                            ),
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width * 0.26,
-                            child: Text(
-                              "Rent",
-                              style: TextStyle(color: Colors.white),
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              widget.goDetails(widget.car);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(top: 15, bottom: 15),
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.26,
+                              child: Text("Details"),
                             ),
                           ),
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              widget.goService(widget.car);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(top: 15, bottom: 15),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20.0),
+                                    bottomRight: Radius.circular(25.0)),
+                                color: CustomColor.mainColor,
+                              ),
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.26,
+                              child: Text(
+                                "Rent",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          )
                         ],
                       )
                     ],
@@ -85,14 +100,13 @@ class _ItemInfoCar extends State<ItemInfoCar> {
             ],
           ),
           decoration: BoxDecoration(
-              color: CustomColor.greyCar, borderRadius: BorderRadius.circular(20)),
+              color: CustomColor.greyCar,
+              borderRadius: BorderRadius.circular(20)),
           height: 400,
         ),
         Positioned(
           top: 80,
-          child: Image(
-              image: AssetImage(
-                  'assets/images/pngfind 8.png')),
+          child: Image(image: AssetImage('assets/images/pngfind 8.png')),
         ),
       ],
     );
