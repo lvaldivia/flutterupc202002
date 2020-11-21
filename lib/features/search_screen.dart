@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 import 'package:primer_chapoteo/models/car.dart';
+import 'package:primer_chapoteo/ui/item_hot_car.dart';
 import 'package:primer_chapoteo/ui/item_info_car.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -95,7 +96,16 @@ class _SearchScreenState extends State<SearchScreen> {
                             itemBuilder: (context, i) {
                               return ItemInfoCar(car: cars[i],);
                             }),
-                      )
+                      ),
+                     Container(
+                       child:  ListView.builder(
+                           itemCount: cars.length,
+                           physics: new NeverScrollableScrollPhysics(),
+                           shrinkWrap: true,
+                           itemBuilder: (context, i) {
+                             return ItemHotCar(car: cars[i],);
+                           }),
+                     )
                     ],
                   ),
                 ),

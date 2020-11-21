@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:primer_chapoteo/features/choose_service_screen.dart';
+import 'package:primer_chapoteo/features/map_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        ChooseServiceScreen()));
+                                        MapScreen()));
                           },
                           child: Container(
                             width: 45,
