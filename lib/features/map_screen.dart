@@ -26,6 +26,7 @@ class _MapScreenState extends State<MapScreen> {
 
   Map<String, Marker> markers = {};
   Position position;
+
   void getPosition() async {
     position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -33,10 +34,22 @@ class _MapScreenState extends State<MapScreen> {
       target: LatLng(position.latitude, position.longitude),
       zoom: 19,
     );
-    markers["1"] = new Marker(markerId: MarkerId("1"), position: initialPos.target);
-    markers["2"] = new Marker(markerId: MarkerId("2"), position: new LatLng( -12.104061, -76.962902));
-    markers["3"] = new Marker(markerId: MarkerId("3"), position: new LatLng( -12.055623817645479, -77.08433839575153));
-    markers["4"] = new Marker(markerId: MarkerId("4"), position: new LatLng( -11.975535, -77.060665));
+    List<LatLng> positions = new List<LatLng>();
+    positions.add(initialPos.target);
+    positions.add(new LatLng(-12.104061, -76.962902));
+    positions.add(new LatLng(-12.055623817645479, -77.08433839575153));
+    positions.add(new LatLng(-11.975535, -77.060665));
+    for (int i = 0; i < positions.length; i++) {
+      markers[i.toString()] = new Marker(
+          markerId: MarkerId(i.toString()),
+          position: positions[i],
+          infoWindow: InfoWindow(
+            title: "Esto es una prueba",
+          ),
+          onTap: () {
+            print(markers[i.toString()].position);
+          });
+    }
     setState(() {});
   }
 
@@ -54,7 +67,9 @@ class _MapScreenState extends State<MapScreen> {
                     _controller.complete(controller);
                   },
                 )
-              : Container(),
+              : Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
       ),
     );

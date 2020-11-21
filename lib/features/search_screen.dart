@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primer_chapoteo/features/map_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 import 'package:primer_chapoteo/models/car.dart';
 import 'package:primer_chapoteo/ui/item_hot_car.dart';
@@ -15,6 +16,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<Car> cars;
+  TextEditingController searchController = new TextEditingController();
+  bool showResults = false;
   @override
   void initState() {
     cars = new List<Car>();
@@ -44,9 +47,17 @@ class _SearchScreenState extends State<SearchScreen> {
                               height: 50,
                               child: Row(
                                 children: [
+                                  SizedBox(width: 10,),
                                   Icon(Icons.location_on_outlined),
                                   Expanded(
                                     child: TextField(
+                                      controller: searchController,
+                                      onChanged: (text){
+                                        showResults = searchController.text.trim() != "";
+                                        setState(() {
+
+                                        });
+                                      },
                                       maxLines: 1,
                                       maxLength: 200,
                                       style: TextStyle(
@@ -62,7 +73,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                         disabledBorder: InputBorder.none,
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  showResults ?
+                                  GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => MapScreen()));
+                                    },
+                                    child: Text("Ver Mapa"),
+                                  ) : Container(),
+                                  SizedBox(width: 10,),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -70,6 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(20)))
                         ],
                       ),
+                      !showResults ?
                       Container(
                           margin: EdgeInsets.only(top: 20),
                           child: Column(
@@ -86,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold))
                             ],
-                          )),
+                          )) :
                       Container(
                         height: 300,
                         child: ListView.builder(
@@ -97,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               return ItemInfoCar(car: cars[i],);
                             }),
                       ),
-                     Container(
+                     showResults ? Container(
                        child:  ListView.builder(
                            itemCount: cars.length,
                            physics: new NeverScrollableScrollPhysics(),
@@ -105,7 +128,7 @@ class _SearchScreenState extends State<SearchScreen> {
                            itemBuilder: (context, i) {
                              return ItemHotCar(car: cars[i],);
                            }),
-                     )
+                     ): Container()
                     ],
                   ),
                 ),
