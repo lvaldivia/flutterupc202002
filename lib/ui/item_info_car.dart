@@ -63,7 +63,9 @@ class _ItemInfoCar extends State<ItemInfoCar> {
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
-                              widget.goDetails(widget.car);
+                              if(widget.goDetails != null){
+                                widget.goDetails(widget.car);
+                              }
                             },
                             child: Container(
                               padding: EdgeInsets.only(top: 15, bottom: 15),
@@ -75,7 +77,9 @@ class _ItemInfoCar extends State<ItemInfoCar> {
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
-                              widget.goService(widget.car);
+                              if(widget.goService != null){
+                                widget.goService(widget.car);
+                              }
                             },
                             child: Container(
                               padding: EdgeInsets.only(top: 15, bottom: 15),

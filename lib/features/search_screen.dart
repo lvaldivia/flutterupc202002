@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primer_chapoteo/features/cart_detail_screen.dart';
 import 'package:primer_chapoteo/features/map_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 import 'package:primer_chapoteo/models/car.dart';
@@ -156,11 +157,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                       itemBuilder: (context, i) {
                                         return ItemInfoCar(
                                           car: cars[i],
-                                          goService: (index) {
+                                          goService: (car) {
                                             print("GoService");
                                           },
-                                          goDetails: (index) {
-                                            print("goDetails");
+                                          goDetails: (car) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CarDetailScreen()));
                                           },
                                         );
                                       }),
@@ -194,6 +199,13 @@ class _SearchScreenState extends State<SearchScreen> {
                                       itemBuilder: (context, i) {
                                         return ItemHotCar(
                                           car: cars[i],
+                                          goDetail: (car){
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CarDetailScreen()));
+                                          },
                                         );
                                       }),
                                 )
