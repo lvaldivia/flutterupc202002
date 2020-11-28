@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primer_chapoteo/features/cart_detail_screen.dart';
 import 'package:primer_chapoteo/features/map_screen.dart';
+import 'package:primer_chapoteo/features/payment_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
 import 'package:primer_chapoteo/models/car.dart';
 import 'package:primer_chapoteo/ui/item_hot_car.dart';
@@ -158,7 +159,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                         return ItemInfoCar(
                                           car: cars[i],
                                           goService: (car) {
-                                            print("GoService");
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PaymentScreen()));
                                           },
                                           goDetails: (car) {
                                             Navigator.push(

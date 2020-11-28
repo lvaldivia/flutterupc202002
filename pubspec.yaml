@@ -31,6 +31,10 @@ dependencies:
   hexcolor: ^1.0.6
   google_maps_flutter: ^1.0.6
   geolocator: ^6.1.7
+  awesome_card: ^1.1.0
+  table_calendar: ^2.3.1
+
+
 
 dev_dependencies:
   flutter_test:

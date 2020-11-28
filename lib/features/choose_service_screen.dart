@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:primer_chapoteo/features/search_screen.dart';
 import 'package:primer_chapoteo/global/custom_color.dart';
+import 'package:primer_chapoteo/ui/item_button.dart';
 
 class ChooseServiceScreen extends StatefulWidget {
   @override
@@ -76,28 +77,19 @@ class _ChooseServiceScreenState extends State<ChooseServiceScreen> {
                 ),
               ),
               Positioned(
-                child: GestureDetector(
-                  onTap: () {
+                child: ItemButton(
+                  width: 120,
+                  heigth: 45,
+                  textColor: Colors.white,
+                  buttonColor: CustomColor.mainColor,
+                  text:  "GO",
+                  action: (){
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SearchScreen(
-                                  typeService: defaultService,
-                                )));
+                            builder: (context) =>
+                                SearchScreen(typeService: defaultService,)));
                   },
-                  child: Container(
-                    width: 120,
-                    margin: EdgeInsets.only(bottom: 10),
-                    height: 45,
-                    alignment: Alignment.center,
-                    child: Text(
-                      "GO",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                    decoration: BoxDecoration(
-                        color: CustomColor.mainColor,
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
                 ),
                 right: 60,
                 bottom: 50,
